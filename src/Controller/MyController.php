@@ -14,9 +14,6 @@ class MyController extends Controller
      */
     public function number()
     {
-
-
-
         return $this->render('cv/index.html.twig');
         /*
         $number = random_int(0, 100);
