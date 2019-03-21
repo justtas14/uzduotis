@@ -15,12 +15,6 @@ class MyController extends Controller
     public function number()
     {
         return $this->render('cv/index.html.twig');
-        /*
-        $number = random_int(0, 100);
 
-        return new Response(
-            '<html><body>Lucky number: '.$number.'</body></html>'
-        );
-        */
     }
 }

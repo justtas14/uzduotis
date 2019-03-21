@@ -35,12 +35,12 @@
                 <div class="container info">
                     <div class="row ">
                         <div class="col-sm-4 col-12"><img src="{{ asset('images/blank-profile-picture-973460_640.png') }}" alt="">
-                        <strong><p class="mt-2">Name Surname</p></strong>
+                        <strong><p class="mt-2">{{ mycv.fullName }}</p></strong>
                         </div>
                         <div class="col-sm-6 col-12 addMargin1"><h2>About</h2>
                             <hr class="solid">
                             <p>Few lines about me</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, reiciendis?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, eos!Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, eaque.</p>
+                            <p>{{ mycv.about }}</p>
                             <button type="button" class="btn btn-outline-primary">Contact me</button>
                         </div>
                     </div>

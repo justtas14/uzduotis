@@ -15,11 +15,11 @@ class MyCvController extends AbstractController
      */
     public function index()
     {
-        $entityManager = $this->getDoctrine()->getManager();
+        /*$entityManager = $this->getDoctrine()->getManager();
 
         $cvinf = new CvFields();
         $cvinf->setFullName('Justas Santockis');
-        $cvinf->setAbout('Lalalalalal');
+        $cvinf->setAbout('Something about me');
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($cvinf);
@@ -29,25 +29,17 @@ class MyCvController extends AbstractController
 
         return $this->render('my_cv/index.html.twig', [
             'controller_name' => 'MyCvController',
-        ]);
-    }
+        ]);*/
 
-
-    /**
-     * @Route("/cvobj/{id}", name="obj_show")
-     */
-    public function show($id){
         $cv = $this->getDoctrine()
-            ->getRepository(CvFields::class)
-            ->find($id);
+            ->getRepository(CvFields::class);
 
         if (!$cv) {
             throw $this->createNotFoundException(
-                'No product found for id '.$id
+                'No cv found for id '.$id
             );
         }
 
-        $this->render('my_cv/index.html.twig', ['mycv' => $cv]);
-
+        return $this->render('cv/index.html.twig', ['mycv' => $cv]);
     }
 }

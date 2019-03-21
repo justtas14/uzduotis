@@ -24,7 +24,7 @@ class CvFields
     /**
      * @ORM\Column(type="string", length=200)
      */
-    private $About;
+    private $about;
 
     public function getId(): ?int
     {
@@ -45,12 +45,12 @@ class CvFields
 
     public function getAbout(): ?string
     {
-        return $this->About;
+        return $this->about;
     }
 
-    public function setAbout(string $About): self
+    public function setAbout(string $about): self
     {
-        $this->About = $About;
+        $this->about = $about;
 
         return $this;
     }
