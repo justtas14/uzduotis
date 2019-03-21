@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} CV landing page {% endblock %}
+
+{% block body %}
+
+         <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top" role="navigation">
+             <a class="navbar-brand" href="#">
+                 <img src="{{ asset('images/icons8-cv-48.png') }}" width="40" height="40" class="d-inline-block align-top" alt="">
+             </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+             </button>
+             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             <ul class="navbar-nav">
+                 <li class="nav-item">
+                     <a class="nav-link" href="#">Home</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#">My Skills</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#expSection">Experience</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#footerSection">Contacts</a>
+                 </li>
+
+             </ul>
+             </div>
+        </nav>
+   <main class="container p-3" id="main">
+        <div class="row">
+            <div class="col-lg-8 col-12">
+                <div class="container info">
+                    <div class="row ">
+                        <div class="col-sm-4 col-12"><img src="{{ asset('images/blank-profile-picture-973460_640.png') }}" alt="">
+                        <strong><p class="mt-2">Name Surname</p></strong>
+                        </div>
+                        <div class="col-sm-6 col-12 addMargin1"><h2>About</h2>
+                            <hr class="solid">
+                            <p>Few lines about me</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, reiciendis?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, eos!Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, eaque.</p>
+                            <button type="button" class="btn btn-outline-primary">Contact me</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container" id = "education">
+                    <h4>Education</h4>
+                    <hr class="solid">
+                    <div class="row mt-4">
+                        <div class="col-10 schoolName">School name 1</div>
+                        <div class="col-2">2008-2017</div>
+                    </div>
+                    <p class="mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum, quo.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, deleniti iusto non quod tenetur ullam.</p>
+                    <hr class="dashed">
+                    <div class="row mt-4">
+                        <div class="col-10 schoolName">School name 2</div>
+                        <div class="col-2">2008-2017</div>
+                    </div>
+                    <p class="mt-4">Lorem ipsum dolor sit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, deleniti iusto non quod tenetur ullam.</p>
+                </div>
+
+            </div>
+            <div class="col-lg-1 col-12"></div>
+            <div class="col-lg-3 col-12 addMargin2"><h3 id="skillsRef">Skills</h3>
+            <hr class="solid">
+                <h3 class="mt-5">HTML/CSS</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, harum.</p>
+                <hr class="dashed">
+                <h3>Javascript</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, harum.</p>
+                <hr class="dashed">
+                <h3>PHP</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, harum.</p>
+
+            </div>
+
+        </div>
+   </main>
+    <div id="experience" class="container mt-4 mb-5">
+        <h4 id ="expSection" >Experience</h4>
+        <hr class="solid">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-action list-group-item-primary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, ex.</li>
+            <li class="list-group-item list-group-item-action list-group-item-primary">Lorem ipsum dolor sit amet.</li>
+            <li class="list-group-item list-group-item-action list-group-item-primary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias culpa eum harum iure optio vitae?</li>
+        </ul>
+
+    </div>
+    <br>
+    <footer id="footerSection">
+        <div class="container-fluid">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h4 class="mt-2">Contacts</h4>
+                    <hr class="solid solid2">
+                    <p>+370658489</p>
+                    <p>justtas14@gmail.com</p>
+                    <pStreet g 8</p>
+                    <p>City Country</p>
+                </div>
+            </div>
+
+        </div>
+
+
+    </footer>
+
+{% endblock %}

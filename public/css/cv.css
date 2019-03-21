@@ -1,0 +1,66 @@
+html{
+
+}
+body{
+
+}
+.navbar{
+
+}
+.nav-item{
+    padding: 15px;
+}
+.navbar-nav .nav-item .nav-link{
+    font-size: 20px;
+    color: #fff;
+}
+.navbar{
+
+}
+.navbar-nav{
+
+}
+.schoolName{
+    font-size: 15px;
+    font-weight: bold;
+}
+img{
+    width: 100%;
+    height: auto;
+}
+.solid{
+    border: 1px solid #000;
+}
+.dashed{
+    border: 0.7px dashed #000;
+}
+#education{
+    margin-top: 40px;
+}
+#main{
+    margin-top: 100px;
+}
+@media only screen and (max-width: 576px) {
+    .addMargin1{
+        margin-top: 30px;
+    }
+}
+@media only screen and (max-width: 992px) {
+    .addMargin2{
+        margin-top: 30px;
+    }
+}
+.list-group li{
+    margin: 4px 0 6px 0;
+}
+.solid2{
+    width: 30%;
+}
+#footerSection{
+    border-top: 0.3px solid #000;
+    fill-opacity: 50%;
+    background-color: rgba(66,139,202,0.5);
+}
+#footerSection .container-fluid .row p{
+    font-size: 16px;
+}
