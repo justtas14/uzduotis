@@ -9,11 +9,13 @@
 </style>
 
 <div class="example-wrapper">
-    <h2> {{ mycv.fullName }}</h2>
-    This friendly message is coming from:
+    <h2> This friendly message is coming from: </h2>
+    <h3> Hello</h3>
+
     <ul>
         <li>Your controller at <code><a href="{{ '/var/www/html/src/Controller/MyCvController.php'|file_link(0) }}">src/Controller/MyCvController.php</a></code></li>
         <li>Your template at <code><a href="{{ '/var/www/html/templates/my_cv/index.html.twig'|file_link(0) }}">templates/my_cv/index.html.twig</a></code></li>
+        <li>Back To CV page <a href="{{ path('cv') }}">here</a></li>
     </ul>
 </div>
 {% endblock %}

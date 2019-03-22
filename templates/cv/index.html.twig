@@ -8,7 +8,9 @@
              <a class="navbar-brand" href="#">
                  <img src="{{ asset('images/icons8-cv-48.png') }}" width="40" height="40" class="d-inline-block align-top" alt="">
              </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                               data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                               aria-expanded="false" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
              </button>
              <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -35,13 +37,19 @@
                 <div class="container info">
                     <div class="row ">
                         <div class="col-sm-4 col-12"><img src="{{ asset('images/blank-profile-picture-973460_640.png') }}" alt="">
-                        <strong><p class="mt-2">{{ mycv.fullName }}</p></strong>
+                        {% for cvfields in mycv %}
+                            <strong><p class="mt-2">{{  cvfields.fullName }}</p></strong>
+                            {% endfor %}
                         </div>
                         <div class="col-sm-6 col-12 addMargin1"><h2>About</h2>
                             <hr class="solid">
                             <p>Few lines about me</p>
-                            <p>{{ mycv.about }}</p>
-                            <button type="button" class="btn btn-outline-primary">Contact me</button>
+                            {% for cvfields in mycv %}
+                            <p> {{ cvfields.about}}</p>
+                            {% endfor %}
+                            <a href = "{{ path('showing') }}">
+                                <button type="button" class="btn btn-outline-primary">Contact me</button>
+                            </a>
                         </div>
                     </div>
                 </div>
