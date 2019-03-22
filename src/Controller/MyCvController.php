@@ -2,12 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use App\Entity\CvFields;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Validator\Constraints\Email;
 
-use App\Entity\CvFields;
 
 class MyCvController extends AbstractController
 {
@@ -45,10 +53,20 @@ class MyCvController extends AbstractController
     }
     /**
      *
-     * @Route("/show", name="showing")
+     * @Route("/newForm", name="form")
+     * @Method({"GET","POST"})
      */
-    public function showSomething()
+    public function showForm(Request $request)
     {
-        return $this->render('my_cv/index.html.twig');
+        $visitor = new Contact();
+        $form = $this->createFormBuilder($visitor)
+            ->add('yourEmail', EmailType::class, array('attr' => array('class' => 'form-control')))
+            ->add('message', TextareaType::class, array('attr' => array('class' => 'form-control')))
+            ->add('save', SubmitType::class, array(
+                'label' => 'Send message',
+                'attr' => array('class' => 'btn btn-primary mt-3')))
+            ->getForm();
+
+        return $this->render('my_cv/index.html.twig', array('contactForm' => $form->createView()));
     }
 }
