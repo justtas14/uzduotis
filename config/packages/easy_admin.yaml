@@ -5,3 +5,5 @@ easy_admin:
         class: App\Entity\CvFields
       Contact:
         class: App\Entity\Contact
+      User:
+          class: App\Entity\User

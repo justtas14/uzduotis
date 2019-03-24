@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -21,10 +23,10 @@ class UserFixtures extends Fixture
     {
         $user = new User();
 
-        $user->setPassword($this->passwordEncoder->encodePassword(
-            $user,
-            'the_new_password'
-        ));
+        $user->setEmail("example@gmail.com");
+
+        $password = $this->passwordEncoder->encodePassword($user, 'mypassword123');
+        $user->setPassword($password);
 
 
         $manager->persist($user);
