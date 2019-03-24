@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Entity\CvFields;
 use App\Form\ContactMe;
+use App\Service\PushToDatabase;
+
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,8 +25,11 @@ class MyCvController extends AbstractController
      */
     public function index()
     {
-        $cv = $this->getDoctrine()
-            ->getRepository(CvFields::class)->findAll();
+        $defaultId = 2;
+        $repository = $this->getDoctrine()
+            ->getRepository(CvFields::class);
+
+         $cv = $repository->find($defaultId);
 
         if (!$cv) {
             throw $this->createNotFoundException(
@@ -33,28 +38,30 @@ class MyCvController extends AbstractController
         }
 
 
-        return $this->render('cv/index.html.twig', array('mycv' => $cv));
+        return $this->render('cv/index.html.twig',  ['mycv' => $cv]);
     }
     /**
      *
      * @Route("/newForm", name="form")
      * @Method({"GET","POST"})
      */
-    public function showForm(Request $request)
+    public function showForm(Request $request, PushToDatabase $pushToDatabase)
     {
         $visitor = new Contact();
         $form = $this->createForm(ContactMe::class, $visitor);
 
-
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $visitor = $form->getData();
 
+            $pushToDatabase->pushIt($visitor);
+            /*
             $entityManager = $this->getDoctrine()->getManager();
+
             $entityManager->persist($visitor);
             $entityManager->flush();
+            */
 
             return $this->redirectToRoute('cv');
         }

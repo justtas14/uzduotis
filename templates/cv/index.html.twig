@@ -36,16 +36,12 @@
                 <div class="container info">
                     <div class="row ">
                         <div class="col-sm-4 col-12"><img src="{{ asset('images/blank-profile-picture-973460_640.png') }}" alt="">
-                        {% for cvfields in mycv %}
-                            <strong><p class="mt-2">{{  cvfields.fullName }}</p></strong>
-                            {% endfor %}
+                            <strong><p class="mt-2">{{  mycv.fullName }}</p></strong>
                         </div>
                         <div class="col-sm-6 col-12 addMargin1"><h2>About</h2>
                             <hr class="solid">
                             <p>Few lines about me</p>
-                            {% for cvfields in mycv %}
-                            <p> {{ cvfields.about}}</p>
-                            {% endfor %}
+                            <p> {{ mycv.about}}</p>
                             <a href = "{{ path('form') }}">
                                 <button type="button" class="btn btn-outline-primary">Contact me</button>
                             </a>
