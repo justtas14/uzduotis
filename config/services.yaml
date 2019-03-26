@@ -28,3 +28,7 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Service\PushToDatabase:
         arguments: [ '@doctrine.orm.entity_manager' ]
+
+    App\EventListener\PasswordEncoder:
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }

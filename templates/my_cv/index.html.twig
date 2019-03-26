@@ -2,14 +2,14 @@
 
 {% block title %}Contact me{% endblock %}
 
+
 {% block body %}
 
-    <div class="m-5">
+    <main id="main" class="mb-5 ml-5 mr-5">
 
     {{ form_start(contactForm)}}
     {{ form_widget(contactForm)}}
     {{ form_end(contactForm)}}
 
-    <h3 class="mt-5">Back To CV page <a href="{{ path('cv') }}">here</a></h3>
-    </div>
+    </main>
 {% endblock %}

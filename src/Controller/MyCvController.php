@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Entity\CvFields;
+use App\Entity\Skills;
 use App\Form\ContactMe;
 use App\Service\PushToDatabase;
 
@@ -25,11 +26,13 @@ class MyCvController extends AbstractController
      */
     public function index()
     {
-        $defaultId = 2;
-        $repository = $this->getDoctrine()
+        $userRepository = $this->getDoctrine()
             ->getRepository(CvFields::class);
 
-         $cv = $repository->find($defaultId);
+         $cv = $userRepository->findOneBy([]);
+
+         $skillsRepository = $this->getDoctrine()->getRepository(Skills::class);
+         $skills = $skillsRepository->findAll();
 
         if (!$cv) {
             throw $this->createNotFoundException(
@@ -38,7 +41,7 @@ class MyCvController extends AbstractController
         }
 
 
-        return $this->render('cv/index.html.twig',  ['mycv' => $cv]);
+        return $this->render('cv/index.html.twig', array('skills' => $skills, 'mycv' => $cv));
     }
     /**
      *

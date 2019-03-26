@@ -2,34 +2,14 @@
 
 {% block title %} CV landing page {% endblock %}
 
-{% block body %}
-         <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top" role="navigation">
-             <a class="navbar-brand" href="#">
-                 <img src="{{ asset('images/icons8-cv-48.png') }}" width="40" height="40" class="d-inline-block align-top" alt="">
-             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                               data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                               aria-expanded="false" aria-label="Toggle navigation">
-             <span class="navbar-toggler-icon"></span>
-             </button>
-             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-             <ul class="navbar-nav">
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">Home</a>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">My Skills</a>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#expSection">Experience</a>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#footerSection">Contacts</a>
-                 </li>
+{% block writeMe %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('form') }}">Write me</a>
+    </li>
+{% endblock %}
 
-             </ul>
-             </div>
-        </nav>
+{% block body %}
+
    <main class="container p-3" id="main">
         <div class="row">
             <div class="col-lg-8 col-12">
@@ -67,16 +47,14 @@
             </div>
             <div class="col-lg-1 col-12"></div>
             <div class="col-lg-3 col-12 addMargin2"><h3 id="skillsRef">Skills</h3>
-            <hr class="solid">
-                <h3 class="mt-5">HTML/CSS</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, harum.</p>
-                <hr class="dashed">
-                <h3>Javascript</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, harum.</p>
-                <hr class="dashed">
-                <h3>PHP</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, harum.</p>
-
+            <hr class="solid mb-5">
+                {% for user in skills %}
+                    <h3>{{ user.skillName }}</h3>
+                    <p>{{ user.aboutSkill }}</p>
+                    <hr class="dashed">
+                {% else %}
+                    No skills have been found.
+                {% endfor %}
             </div>
 
         </div>
