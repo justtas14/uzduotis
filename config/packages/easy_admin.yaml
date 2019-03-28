@@ -28,7 +28,7 @@ easy_admin:
           form:
             fields:
               - { property: 'email', type: 'email' }
-              - { property: 'plainPassword', type: 'password' label: 'password'}
+              - { property: 'plainPassword', type: 'password'}
               - {property: 'roles', type: 'collection'}
           show:
             fields:
