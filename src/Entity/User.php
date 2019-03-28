@@ -107,7 +107,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function setPlainPassword($plainPassword)
+    public function setPlainPassword(string $plainPassword) : self
     {
         $this->plainPassword = $plainPassword;
 
@@ -128,6 +128,6 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-       $this->plainPassword = null;
+       $this->plainPassword = "";
     }
 }

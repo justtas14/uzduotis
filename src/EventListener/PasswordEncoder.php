@@ -26,6 +26,13 @@ class PasswordEncoder implements EventSubscriber
     {
         $entity = $args->getObject();
 
+        if (!$entity instanceof User) {
+            return;
+        }
+
+        $password = $this->passwordEncoder->encodePassword($entity, $entity->getPlainPassword());
+        $entity->setPassword($password);
+        $entity->eraseCredentials();
     }
 
     public function prePersist(LifecycleEventArgs $args)
@@ -35,7 +42,8 @@ class PasswordEncoder implements EventSubscriber
         if (!$entity instanceof User) {
             return;
         }
-        $password = $this->passwordEncoder->encodePassword($entity, $entity->getPassword());
+        $password = $this->passwordEncoder->encodePassword($entity, $entity->getPlainPassword());
         $entity->setPassword($password);
+        $entity->eraseCredentials();
     }
 }
