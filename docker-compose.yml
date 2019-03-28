@@ -11,6 +11,9 @@ services:
       - ./:/var/www/html
     networks:
       - default
+    environment:
+      XDEBUG_CONFIG: "remote_host=192.168.1.147"
+      PHP_IDE_CONFIG: "serverName=akademija.local"
 
   mailcatcher:
     build: ./external_services/MailCatcher   

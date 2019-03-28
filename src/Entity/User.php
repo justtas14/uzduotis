@@ -33,6 +33,14 @@ class User implements UserInterface
      */
     private $password;
 
+
+    /**
+     * @var string plain password
+     * @ORM\Column(type="string")
+     */
+    private $plainPassword;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,12 +95,25 @@ class User implements UserInterface
         return (string) $this->password;
     }
 
+    public function getPlainPassword() : string
+    {
+        return (string) $this->plainPassword;
+    }
+
     public function setPassword(string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
 
     /**
      * @see UserInterface
@@ -107,7 +128,6 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+       $this->plainPassword = null;
     }
 }

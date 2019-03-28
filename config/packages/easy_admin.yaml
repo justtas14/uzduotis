@@ -19,11 +19,26 @@ easy_admin:
             - 'message'
       User:
           class: App\Entity\User
+          help: 'It takes so long to respond'
           list:
             fields:
               - 'id'
               - { property: 'email', type: 'email' }
-              - { property: 'roles', type: 'array'}
+              - 'roles'
+          form:
+            fields:
+              - { property: 'email', type: 'email' }
               - { property: 'password', type: 'password' }
+              - {property: 'roles', type: 'collection'}
+          show:
+            fields:
+              - 'id'
+              - { property: 'email', type: 'email' }
+              - {property: 'roles', type: 'collection'}
+          search:
+            fields:
+              - 'id'
+              - { property: 'email', type: 'email' }
+              - {property: 'roles', type: 'collection'}
       Skills:
           class: App\Entity\Skills

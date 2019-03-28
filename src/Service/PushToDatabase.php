@@ -13,7 +13,7 @@ class PushToDatabase
     {
         $this->em = $em;
     }
-    public function pushIt(Contact $visitor)
+    public function pushIt($visitor)
     {
         $this->em->persist($visitor);
         $this->em->flush();
