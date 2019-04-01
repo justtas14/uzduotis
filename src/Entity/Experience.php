@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CvFieldsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ExperienceRepository")
  */
-class CvFields
+class Experience
 {
     /**
      * @ORM\Id()
@@ -17,30 +17,29 @@ class CvFields
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="experiences")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $fullName;
+    private $user;
 
     /**
-     * @ORM\Column(type="string", length=200)
+     * @ORM\Column(type="string", length=500)
      */
     private $about;
-
-
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFullName(): ?string
+    public function getUser(): ?User
     {
-        return $this->fullName;
+        return $this->user;
     }
 
-    public function setFullName(string $fullName): self
+    public function setUser(?User $user): self
     {
-        $this->fullName = $fullName;
+        $this->user = $user;
 
         return $this;
     }

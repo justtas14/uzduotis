@@ -4,34 +4,88 @@
 
 {% block nav %} {% endblock %}
 {% block body %}
-<form method="post" class="m-5 p-4">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <form method="post" class="mt-5 mb-5">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail" class="sr-only">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-1 w-50" placeholder="Email" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control w-50" placeholder="Password" required>
+                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                <label for="inputEmail" class="sr-only">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-1 w-50" placeholder="Email" required autofocus>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control w-50" placeholder="Password" required>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
+                {#
+                    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                    See https://symfony.com/doc/current/security/remember_me.html
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+                #}
+
+                <button class="btn btn-lg btn-primary mt-4" type="submit">
+                    Sign in
+                </button>
+
+                <button class="btn btn-lg btn-primary mt-4" type="button" id="register">
+                    Register
+                </button>
+                </form>
+                <br>
+                <div id="registerForm">
+                    <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+                    <hr class="solid alignedLeft mb-5" align="left">
+                    {{ form_start(registerForm) }}
+                    {{ form_widget(registerForm) }}
+                    {{ form_end(registerForm) }}
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <h1 class="h3 mb-3 mt-5 font-weight-normal">User's CV list</h1>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr class="table-primary">
+                        <th scope="col">ID</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in cvs %}
+                        <tr class="clickable-row" data-href="{{ path('cv', {'id': user.id}) }}">
+                            <th scope="row"><a >{{ user.id }}</th>
+                            <td>{{ user.fullName }}</td>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                    {% else %}
+                        <th scope="row" colspan="3">No users have been registered</th>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    #}
+    </div>
+{% endblock %}
 
-    <button class="btn btn-lg btn-primary mt-4" type="submit">
-        Sign in
-    </button>
-</form>
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+            $("#register").click(function() {
+                $("#registerForm").show("slow");
+            });
+        });
+    </script>
 {% endblock %}

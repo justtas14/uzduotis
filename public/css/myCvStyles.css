@@ -16,6 +16,10 @@ img{
 .solid{
     border: 1px solid #000;
 }
+.alignedLeft{
+    border: 0.8px solid #000;
+    width: 50%;
+}
 .dashed{
     border: 0.7px dashed #000;
 }
@@ -42,15 +46,21 @@ img{
     width: 30%;
 }
 #footerSection{
-    background-color: rgba(66,139,202,0.3);
+    background-color: rgba(2, 117, 216, 0.3);
 }
 #footerSection .container-fluid .row p{
     font-size: 16px;
 }
-.emailField{
+.textField{
     width: 50%;
 }
 .messageField{
     width: 50%;
     resize: none;
+}
+.clickable-row{
+    cursor: pointer;
+}
+#registerForm{
+    display: none;
 }

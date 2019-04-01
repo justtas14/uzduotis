@@ -4,7 +4,22 @@
 
 {% block writeMe %}
     <li class="nav-item">
-        <a class="nav-link" href="{{ path('form') }}">Write me</a>
+        <a class="nav-link" href="{{ path('form', {id: mycv.id}) }}">Write me</a>
+    </li>
+{% endblock %}
+{% block home %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('cv', {id: mycv.id}) }}">Home</a>
+    </li>
+{% endblock %}
+{% block experience %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('cv', {id: mycv.id}) }}#expSection">Experience</a>
+    </li>
+{% endblock %}
+{% block contacts %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('cv', {id: mycv.id}) }}#footerSection">Contacts</a>
     </li>
 {% endblock %}
 
@@ -22,7 +37,7 @@
                             <hr class="solid">
                             <p>Few lines about me</p>
                             <p> {{ mycv.about}}</p>
-                            <a href = "{{ path('form') }}">
+                            <a href = "{{ path('form', {id: mycv.id}) }}">
                                 <button type="button" class="btn btn-outline-primary">Contact me</button>
                             </a>
                         </div>
@@ -30,45 +45,44 @@
                 </div>
                 <div class="container" id = "education">
                     <h4>Education</h4>
-                    <hr class="solid">
+                    <hr class="solid mb-4">
+                    {% for education in mycv.educations %}
                     <div class="row mt-4">
-                        <div class="col-10 schoolName">School name 1</div>
-                        <div class="col-2">2008-2017</div>
+                        <div class="col-10 schoolName">{{ education.getEducationTitle }}</div>
+                        <div class="col-2"> {{ education.getEducationYear }}</div>
                     </div>
-                    <p class="mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum, quo.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, deleniti iusto non quod tenetur ullam.</p>
+                    <p class="mt-4">{{ education.getAbout }}</p>
                     <hr class="dashed">
-                    <div class="row mt-4">
-                        <div class="col-10 schoolName">School name 2</div>
-                        <div class="col-2">2008-2017</div>
-                    </div>
-                    <p class="mt-4">Lorem ipsum dolor sit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, deleniti iusto non quod tenetur ullam.</p>
+                    {% else %}
+                        <p> No education have been found. </p>
+                    {% endfor %}
                 </div>
-
             </div>
             <div class="col-lg-1 col-12"></div>
             <div class="col-lg-3 col-12 addMargin2"><h3 id="skillsRef">Skills</h3>
             <hr class="solid mb-5">
-                {% for user in skills %}
+                {% for user in mycv.skills %}
                     <h3>{{ user.skillName }}</h3>
                     <p>{{ user.aboutSkill }}</p>
                     <hr class="dashed">
                 {% else %}
-                    No skills have been found.
+                    <p> No skills have been found. </p>
                 {% endfor %}
             </div>
-
+            <div id="experience" class="container mt-5 mb-5">
+                <h4 id ="expSection" >Experience</h4>
+                <hr class="solid mb-4">
+                <ul class="list-group">
+                    {% for experience in mycv.experiences %}
+                        <li class="list-group-item list-group-item-action list-group-item-primary">{{ experience.getAbout }}</li>
+                    {% else %}
+                        <p> No experience have been found. </p>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
    </main>
-    <div id="experience" class="container mt-4 mb-5">
-        <h4 id ="expSection" >Experience</h4>
-        <hr class="solid">
-        <ul class="list-group">
-            <li class="list-group-item list-group-item-action list-group-item-primary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, ex.</li>
-            <li class="list-group-item list-group-item-action list-group-item-primary">Lorem ipsum dolor sit amet.</li>
-            <li class="list-group-item list-group-item-action list-group-item-primary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias culpa eum harum iure optio vitae?</li>
-        </ul>
 
-    </div>
     <br>
     <footer id="footerSection">
         <div class="container-fluid">
@@ -76,10 +90,9 @@
                 <div class="col-12">
                     <h4 class="mt-2">Contacts</h4>
                     <hr class="solid solid2">
-                    <p>+370658489</p>
-                    <p>justtas@gmail.com</p>
-                    <pStreet g 8</p>
-                    <p>City Country</p>
+                    <p>{{ mycv.telephone }}</p>
+                    <p>{{ mycv.email }}</p>
+                    <p> {{ mycv.location }}</p>
                 </div>
             </div>
 

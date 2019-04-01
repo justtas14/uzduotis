@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\EmailRepository")
  */
-class Contact
+class Message
 {
     /**
      * @ORM\Id()
@@ -17,12 +17,18 @@ class Contact
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="emails")
+     * @ORM\JoinColumn(nullable=false)
      */
-    protected  $yourEmail;
+    private $user;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=50)
+     */
+    protected  $senderEmail;
+
+    /**
+     * @ORM\Column(type="string", length=500)
      */
     protected  $message;
 
@@ -31,14 +37,25 @@ class Contact
         return $this->id;
     }
 
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
     public function getYourEmail(): ?string
     {
-        return $this->yourEmail;
+        return $this->senderEmail;
     }
 
     public function setYourEmail(string $yourEmail): self
     {
-        $this->yourEmail = $yourEmail;
+        $this->senderEmail = $yourEmail;
 
         return $this;
     }

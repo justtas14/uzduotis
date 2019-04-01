@@ -2,24 +2,53 @@
 
 namespace App\Controller;
 
-use App\DataFixtures\UserFixtures;
+use App\Entity\User;
+use App\Form\RegisterType;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/", name="app_login")
+     * @Method({"GET","POST"})
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(ValidatorInterface $validator, Request $request, AuthenticationUtils $authenticationUtils): Response
     {
+        $user = new User();
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        $usersRepository = $this->getDoctrine()
+            ->getRepository(User::class);
+
+        $users = $usersRepository->findAll();
+
+        $form = $this->createForm(RegisterType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('/');
+        }
+
+
+        return $this->render('security/login.html.twig', array('last_username' => $lastUsername, 'error' => $error,
+            'cvs' => $users, 'registerForm' => $form->createView()));
     }
 }

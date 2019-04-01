@@ -2,6 +2,22 @@
 
 {% block title %}Contact me{% endblock %}
 
+{% block home %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('cv', {id: app.request.get('id')}) }}">Home</a>
+    </li>
+{% endblock %}
+{% block experience %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('cv', {id: app.request.get('id')}) }}#expSection">Experience</a>
+    </li>
+{% endblock %}
+{% block contacts %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('cv', {id: app.request.get('id')}) }}#footerSection">Contacts</a>
+    </li>
+{% endblock %}
+
 
 {% block body %}
 

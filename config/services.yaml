@@ -29,7 +29,7 @@ services:
     App\Service\PushToDatabase:
         arguments: [ '@doctrine.orm.entity_manager' ]
 
-    App\EventListener\PasswordEncoder:
+    App\EventListener\PasswordEncoderListener:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }
