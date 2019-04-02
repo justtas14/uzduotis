@@ -17,6 +17,24 @@
         <a class="nav-link" href="{{ path('cv', {id: app.request.get('id')}) }}#footerSection">Contacts</a>
     </li>
 {% endblock %}
+{% block users %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                User's list
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                {% for user in app.request.get('users') %}
+                    <a class="dropdown-item" href="{{ path('form', {'id': user.getId}) }}">{{ user.email }}</a>
+                    {% else %}
+                        <a class="dropdown-item" href="#">No users have been found</a>
+                {% endfor %}
+            </div>
+        </li>
+    </ul>
+{% endblock %}
+
+
 
 
 {% block body %}

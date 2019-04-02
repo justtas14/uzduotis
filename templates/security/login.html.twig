@@ -7,7 +7,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-lg-6 col-12">
-                <form method="post" class="mt-5 mb-5">
+                <form method="post" class="mt-5 mb-5" action="{{ path('app_login') }}">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}

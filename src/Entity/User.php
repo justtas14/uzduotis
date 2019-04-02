@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -50,9 +51,18 @@ class User implements UserInterface
     private $about;
 
     /**
-     * @ORM\Column(type="string", length=200, nullable=true)
+     * @Assert\Image(
+     *     minWidth = 200,
+     *     maxWidth = 400,
+     *     minHeight = 200,
+     *     maxHeight = 400,
+     *     minHeightMessage="The image height is too small ({{ height }}px).
+            Minimum height expected is {{ min_height }}px."
+     *     maxHeightMessage="The image height is too big ({{ height }}px).
+            Allowed maximum height is {{ max_height }}px.",
+     * )
      */
-    private $imageUrl;
+    private $image;
 
 
     /**
@@ -170,16 +180,14 @@ class User implements UserInterface
 
         return $this;
     }
-    public function getImage(): ?string
+    public function setImage(File $file = null)
     {
-        return $this->imageUrl;
+        $this->image = $file;
     }
 
-    public function setImage(string $image): self
+    public function getImage()
     {
-        $this->imageUrl = $image;
-
-        return $this;
+        return $this->image;
     }
 
 

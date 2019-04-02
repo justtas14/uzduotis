@@ -4,7 +4,7 @@
 
 {% block writeMe %}
     <li class="nav-item">
-        <a class="nav-link" href="{{ path('form', {id: mycv.id}) }}">Write me</a>
+        <a class="nav-link" href="{{ path('form', {id: mycv.id, users: allCv}) }}">Write me</a>
     </li>
 {% endblock %}
 {% block home %}
@@ -22,6 +22,20 @@
         <a class="nav-link" href="{{ path('cv', {id: mycv.id}) }}#footerSection">Contacts</a>
     </li>
 {% endblock %}
+{% block users %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                User's list
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                {% for user in allCv %}
+                    <a class="dropdown-item" href="{{ path('cv', {'id': user.id}) }}">{{ user.email }}</a>
+                {% endfor %}
+            </div>
+        </li>
+    </ul>
+{% endblock %}
 
 {% block body %}
 
@@ -37,7 +51,7 @@
                             <hr class="solid">
                             <p>Few lines about me</p>
                             <p> {{ mycv.about}}</p>
-                            <a href = "{{ path('form', {id: mycv.id}) }}">
+                            <a href = "{{ path('form', {id: mycv.id, users: allCv}) }}">
                                 <button type="button" class="btn btn-outline-primary">Contact me</button>
                             </a>
                         </div>

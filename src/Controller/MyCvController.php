@@ -29,6 +29,8 @@ class MyCvController extends AbstractController
 
          $cv = $userRepository->findOneBy(['id' => $id]);
 
+         $allCv = $userRepository->findAll();
+
         // $skillsRepository = $this->getDoctrine()->getRepository(Skill::class);
          //$skills = $skillsRepository->findAll();
 
@@ -38,7 +40,7 @@ class MyCvController extends AbstractController
             );
         }
 
-        return $this->render('cv/index.html.twig', array('mycv' => $cv));
+        return $this->render('cv/index.html.twig', array('mycv' => $cv, 'allCv' => $allCv));
     }
     /**
      *

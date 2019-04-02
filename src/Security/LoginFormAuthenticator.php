@@ -78,7 +78,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
@@ -87,7 +86,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-
         $userId =  $this->getUser($this->getCredentials($request), $this->userProvider)->getId();
          return new RedirectResponse($this->urlGenerator->generate('cv', ['id' => $userId]));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);

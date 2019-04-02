@@ -11,15 +11,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/", name="app_login")
+     * @Route("/login", name="app_login")
      * @Method({"GET","POST"})
      */
-    public function login(ValidatorInterface $validator, Request $request, AuthenticationUtils $authenticationUtils): Response
+    public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
+    {
+        return $this->redirectToRoute('registration');
+    }
+    /**
+     * @Route("/", name="registration")
+     * @Method({"GET","POST"})
+     */
+    public function register(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
         $user = new User();
         // get the login error if there is one
@@ -30,6 +37,7 @@ class SecurityController extends AbstractController
         $usersRepository = $this->getDoctrine()
             ->getRepository(User::class);
 
+        // TODO: Add Pagination
         $users = $usersRepository->findAll();
 
         $form = $this->createForm(RegisterType::class, $user);
@@ -44,11 +52,11 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('/');
+            return $this->redirectToRoute('registration');
         }
 
 
-        return $this->render('security/login.html.twig', array('last_username' => $lastUsername, 'error' => $error,
-            'cvs' => $users, 'registerForm' => $form->createView()));
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error,
+            'cvs' => $users, 'registerForm' => $form->createView()]);
     }
 }

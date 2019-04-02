@@ -14,7 +14,7 @@ class ContactMe extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('yourEmail', EmailType::class, array(
-            'attr' => array('class' => 'form-control emailField')))
+            'attr' => array('class' => 'form-control textField')))
             ->add('message', TextareaType::class, array(
             'attr' => array('class' => 'form-control messageField', 'rows' => '5')))
             ->add('save', SubmitType::class, array(
