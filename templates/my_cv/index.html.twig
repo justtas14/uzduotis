@@ -4,27 +4,27 @@
 
 {% block home %}
     <li class="nav-item">
-        <a class="nav-link" href="{{ path('cv', {id: app.request.get('id')}) }}">Home</a>
+        <a class="nav-link" href="{{ path('cv', {id: userId}) }}">Home</a>
     </li>
 {% endblock %}
 {% block experience %}
     <li class="nav-item">
-        <a class="nav-link" href="{{ path('cv', {id: app.request.get('id')}) }}#expSection">Experience</a>
+        <a class="nav-link" href="{{ path('cv', {id: userId}) }}#expSection">Experience</a>
     </li>
 {% endblock %}
 {% block contacts %}
     <li class="nav-item">
-        <a class="nav-link" href="{{ path('cv', {id: app.request.get('id')}) }}#footerSection">Contacts</a>
+        <a class="nav-link" href="{{ path('cv', {id: userId}) }}#footerSection">Contacts</a>
     </li>
 {% endblock %}
 {% block users %}
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link drodown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 User's list
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                {% for user in app.request.get('users') %}
+                {% for user in allCv %}
                     <a class="dropdown-item" href="{{ path('form', {'id': user.getId}) }}">{{ user.email }}</a>
                     {% else %}
                         <a class="dropdown-item" href="#">No users have been found</a>
@@ -40,8 +40,7 @@
 {% block body %}
 
     <main id="main" class="mb-5 ml-5 mr-5">
-
-    {{ form_start(contactForm)}}
+        {{ form_start(contactForm, {attr: {novalidate: 'novalidate'}}) }}
     {{ form_widget(contactForm)}}
     {{ form_end(contactForm)}}
 

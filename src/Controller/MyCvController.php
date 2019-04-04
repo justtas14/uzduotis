@@ -40,7 +40,8 @@ class MyCvController extends AbstractController
             );
         }
 
-        return $this->render('cv/index.html.twig', array('mycv' => $cv, 'allCv' => $allCv));
+        return $this->render('cv/index.html.twig',
+            array('mycv' => $cv, 'allCv' => $allCv));
     }
     /**
      *
@@ -55,6 +56,7 @@ class MyCvController extends AbstractController
             ->getRepository(User::class);
 
         $user = $userRepository->findOneBy(['id' => $id]);
+        $allCv = $userRepository->findAll();
 
         if (!$user) {
             throw $this->createNotFoundException(
@@ -79,6 +81,7 @@ class MyCvController extends AbstractController
             return $this->redirectToRoute('cv', ['id' => $id]);
         }
 
-        return $this->render('my_cv/index.html.twig', array('contactForm' => $form->createView()));
+        return $this->render('my_cv/index.html.twig',
+            ['contactForm' => $form->createView(), 'userId' => $id, 'allCv' => $allCv]);
     }
 }

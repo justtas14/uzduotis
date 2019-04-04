@@ -50,18 +50,7 @@ class User implements UserInterface
      */
     private $about;
 
-    /**
-     * @Assert\Image(
-     *     minWidth = 200,
-     *     maxWidth = 400,
-     *     minHeight = 200,
-     *     maxHeight = 400,
-     *     minHeightMessage="The image height is too small ({{ height }}px).
-            Minimum height expected is {{ min_height }}px."
-     *     maxHeightMessage="The image height is too big ({{ height }}px).
-            Allowed maximum height is {{ max_height }}px.",
-     * )
-     */
+
     private $image;
 
 
@@ -266,7 +255,7 @@ class User implements UserInterface
      */
     public function isPasswordEqual()
     {
-        return $this->plainPassword !== $this->repeatPlainPassword;
+        return $this->plainPassword == $this->repeatPlainPassword;
     }
 
     /**
